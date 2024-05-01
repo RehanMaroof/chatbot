@@ -1,15 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Hospital FAQ Chatbot</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Chatbot</title>
 </head>
 <body>
-    <h1>Hospital FAQ Chatbot</h1>
-    <form action="/button_click" method="post">
-        {% for button in buttons %}
-            <button type="submit" name="button_id" value="{{ button }}">{{ button }}</button>
-        {% endfor %}
-    </form>
-    <p>Current State: {{ state }}</p>
+    <h1>Hospital Chatbot</h1>
+    <button id="general_info_button">General Info</button>
+    <button id="services_button">Services</button>
+    <button id="appointments_button">Appointments</button>
+    <script>
+        const buttons = document.querySelectorAll("button");
+        buttons.forEach(button => {
+            button.addEventListener("click", async () => {
+                const response = await fetch("/chatbot", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        event: button.id
+                    })
+                });
+                const data = await response.json();
+                console.log(data);
+            });
+        });
+    </script>
 </body>
 </html>
