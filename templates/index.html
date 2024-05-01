@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hospital FAQ Chatbot</title>
+</head>
+<body>
+    <h1>Hospital FAQ Chatbot</h1>
+    <form action="/button_click" method="post">
+        {% for button in buttons %}
+            <button type="submit" name="button_id" value="{{ button }}">{{ button }}</button>
+        {% endfor %}
+    </form>
+    <p>Current State: {{ state }}</p>
+</body>
+</html>
